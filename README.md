@@ -6,11 +6,11 @@
 
 #### 技术说明
 
-本软件旨在解决大学新生最头疼的问题之一 - 调整论文格式, 帮助初学者更多地把精力放在写作上; 同时, 本软件基于 Markdown 语法, 也能给用户未来进一步学习 LaTeX 做准备 (但是本软件希望可以部分地淘汰复杂、难配置、中文支持较差的 LaTeX)
+本软件旨在解决大学新生最头疼的问题之一 - 调整论文格式, 帮助初学者更多地把精力放在写作上; 同时, 本软件基于 Markdown 语法, 也能给用户未来进一步学习 LaTeX 做准备 (但是希望可以部分地淘汰复杂、难配置、中文支持较差的 LaTeX, 仅使用其强大的数学公式生成功能)
 
-技术栈为 `React` + `Ant Design` (可能) + `Electron` + `TypeScript` + `Electron Vite`, 初版支持心理学报格式, 后续将支持北师大毕业论文和 APA 格式
+技术栈为 `React` + `Ant Design` + `Electron(electron-vite)` + `TypeScript` + `TailwindCSS`, 初版支持心理学报格式, 后续将支持北师大毕业论文和 APA 格式
 
-相关技术源于我的另一个项目 [MarkdownPaper](https://github.com/LeafYeeXYZ/MarkdownPaper), 也欢迎对计算机有一定了解的朋友使用这个命令行小程序和你喜欢的任意编辑器撰写学术论文; 未来会尝试打通两个项目的功能, 即将我的 MarkdownPaper 项目作为本项目生成 DOCX、PDF、HTML 等格式的 API 来进行调用
+本软件后端基于我的另一个项目 [MarkdownPaper](https://github.com/LeafYeeXYZ/MarkdownPaper), 也欢迎对计算机有一定了解的朋友使用这个命令行小程序和你喜欢的任意编辑器撰写学术论文
 
 软件基本模块包括: 文件打开和自动保存、以指定格式导出、论文格式选择、带语法高亮的富文本编辑器、实时预览; 未来将支持独立的参考文献管理、AI 文章润色和参考文献查询 (基于本地 ollama)、插件系统、插入 LaTeX 公式等功能
 
