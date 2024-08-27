@@ -100,7 +100,7 @@ export default function Toolbar(): JSX.Element {
             })
             .catch(() => {
               messageApi!.destroy()
-              messageApi!.error('导出失败')
+              messageApi!.error('导出失败, 请检查是否正确安装了 Chrome 浏览器')
             })
             .finally(() => setDisabled(false))
         }}

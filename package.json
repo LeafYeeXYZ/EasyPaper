@@ -27,7 +27,6 @@
     "@electron-toolkit/utils": "^3.0.0",
     "antd": "^5.20.3",
     "marked": "^14.1.0",
-    "puppeteer": "^23.2.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {

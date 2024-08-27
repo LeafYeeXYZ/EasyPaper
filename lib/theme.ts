@@ -1,5 +1,5 @@
 /* eslint-disable no-irregular-whitespace */
-import type { PDFOptions } from 'puppeteer'
+import type { PrintToPDFOptions } from 'electron'
 
 export interface MarkdownPaperTheme {
   /**
@@ -34,7 +34,7 @@ export interface MarkdownPaperTheme {
    * PDF 参数
    * 无需设置路径
    */
-  pdfOptions: PDFOptions
+  pdfOptions: PrintToPDFOptions
 }
 
 export const getTheme = (themeName: string): MarkdownPaperTheme => {
@@ -206,12 +206,12 @@ export const APS: MarkdownPaperTheme = {
     return html
   },
   pdfOptions: {
-    format: 'A4',
-    margin: {
-      top: '2cm',
-      right: '2.5cm',
-      bottom: '2cm',
-      left: '2.5cm'
+    pageSize: 'A4',
+    margins: {
+      top: 0.8,
+      right: 1,
+      bottom: 1,
+      left: 0.8
     },
     displayHeaderFooter: true,
     headerTemplate: `<div></div>`,

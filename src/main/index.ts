@@ -5,7 +5,6 @@ import icon from '../../resources/icon.png?asset'
 import fs from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
-import puppeteer from 'puppeteer'
 import { mdToHtml } from '../../lib/render'
 import { getTheme } from '../../lib/theme'
 
@@ -155,10 +154,8 @@ app.whenReady().then(() => {
       if (canceled) {
         return false
       }
-      const dist = path.resolve(filePath)
-      const browser = await puppeteer.launch()
-      const page = await browser.newPage()
       const theme = getTheme(themeName)
+      const dist = path.resolve(filePath)
       const html = (await mdToHtml(markdown, theme)).replace(/<img src="(.+?)"/g, (match, p1) => {
         if (p1.startsWith('http')) return match
         try {
@@ -169,9 +166,16 @@ app.whenReady().then(() => {
           return match
         }
       })
-      await page.setContent(html)
-      await page.pdf({ path: dist, ...theme.pdfOptions })
-      await browser.close()
+      const win = new BrowserWindow()
+      const temp = path.resolve(filepath, 'easy_paper_temp_file.html')
+      await fs.writeFile(temp, html)
+      const url = `file://${temp}`
+      win.loadURL(url)
+      await new Promise((resolve) => win.webContents.on('did-finish-load', resolve))
+      const pdf = await win.webContents.printToPDF(theme.pdfOptions)
+      await fs.writeFile(dist, pdf)
+      await fs.rm(temp)
+      win.close()
       return true
     }
   )
