@@ -18,13 +18,17 @@
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux"
+    "build:linux": "electron-vite build && electron-builder --linux",
+    "build:both": "electron-vite build && electron-builder --mac --arm64 && electron-builder --win --x64"
   },
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "antd": "^5.20.2"
+    "antd": "^5.20.3",
+    "marked": "^14.1.0",
+    "puppeteer": "^23.2.0",
+    "zustand": "^4.5.5"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
@@ -40,7 +44,6 @@
     "electron-vite": "^2.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.35.0",
-    "markdown-paper": "^2.2.1",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
     "react": "^18.3.1",

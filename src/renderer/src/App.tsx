@@ -19,7 +19,7 @@ function App(): JSX.Element {
         <div className="overflow-auto" style={{ scrollbarWidth: 'none' }}>
           <Toolbar />
         </div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 overflow-hidden" style={{ scrollbarWidth: 'none' }}>
           <Preview />
           <Editor />
         </div>

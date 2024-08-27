@@ -10,8 +10,8 @@
 
 技术栈为 `React` + `Ant Design` + `Electron(electron-vite)` + `TypeScript` + `TailwindCSS`, 初版支持心理学报格式, 后续将支持北师大毕业论文和 APA 格式
 
-本软件后端基于我的另一个项目 [MarkdownPaper](https://github.com/LeafYeeXYZ/MarkdownPaper), 也欢迎对计算机有一定了解的朋友使用这个命令行小程序和你喜欢的任意编辑器撰写学术论文
+本软件后端实现了我的另一个项目 [MarkdownPaper](https://github.com/LeafYeeXYZ/MarkdownPaper) 的大部分功能 (但由于 Electron 环境奇怪的兼容问题, 没有直接引入它), 也欢迎对计算机有一定了解的朋友使用这个命令行小程序和你喜欢的任意编辑器撰写学术论文
 
-软件基本模块包括: 文件打开和自动保存、以指定格式导出、论文格式选择、带语法高亮的富文本编辑器、实时预览; 未来将支持独立的参考文献管理、AI 文章润色和参考文献查询 (基于本地 ollama)、插件系统、插入 LaTeX 公式等功能
+软件基本模块包括: 文件打开和自动保存、以指定格式导出、论文格式选择、实时预览; 未来将支持独立的参考文献管理、AI 文章润色和参考文献查询 (基于本地 ollama)、插件系统、插入 LaTeX 公式等功能
 
 最后, 本人技术和精力都有限, 也欢迎各方大佬一起参与开发!

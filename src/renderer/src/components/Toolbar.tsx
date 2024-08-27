@@ -1,8 +1,9 @@
-import { Button } from 'antd'
+import { Button, Select } from 'antd'
 import {
   FileAddOutlined,
   FolderOpenOutlined,
   SaveOutlined,
+  QuestionCircleOutlined,
   FileMarkdownOutlined,
   FilePdfOutlined,
   FileTextOutlined,
@@ -22,17 +23,26 @@ export default function Toolbar(): JSX.Element {
         <SaveOutlined /> 保存
       </Button>
       <Button>
-        <FileMarkdownOutlined /> 导出为 Markdown
+        <QuestionCircleOutlined /> 帮助
+      </Button>
+      <p className="text-sm px-1 text-nowrap">导出为:</p>
+      <Button>
+        <FileMarkdownOutlined /> Markdown
       </Button>
       <Button>
-        <FilePdfOutlined /> 导出为 PDF
+        <FilePdfOutlined /> PDF
       </Button>
       <Button>
-        <FileTextOutlined /> 导出为 HTML
+        <FileTextOutlined /> HTML
       </Button>
       <Button>
-        <FileWordOutlined /> 导出为 Word
+        <FileWordOutlined /> Word
       </Button>
+      <p className="text-sm px-1 text-nowrap">论文格式:</p>
+      <Select defaultValue="aps">
+        <Select.Option value="aps">心理学报</Select.Option>
+      </Select>
+      &nbsp;
     </div>
   )
 }

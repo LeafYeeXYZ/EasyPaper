@@ -1,8 +1,24 @@
+import { mdToHtml } from '../../../../resources/lib/render'
+import { useStore } from '../lib/useStore'
+import { useState, useEffect } from 'react'
+
 export default function Preview(): JSX.Element {
+  const { markdown, theme } = useStore()
+  const [html, setHtml] = useState('')
+  useEffect(() => {
+    mdToHtml(markdown, theme).then(setHtml)
+  }, [markdown, theme])
   return (
-    <div className="pl-2 pr-1 pb-2 w-full h-full">
-      <div className="border w-full h-full rounded-md">
-        <span className="text-xs text-gray-300 block p-2">此处将显示内容预览</span>
+    <div className="p-2 pr-1 pt-0 w-full h-full overflow-hidden">
+      <div
+        className="border w-full h-full rounded-md shadow-md overflow-auto"
+        style={{ scrollbarWidth: 'none' }}
+      >
+        {markdown ? (
+          <iframe className="w-full h-full p-8" srcDoc={html} />
+        ) : (
+          <span className="text-xs text-gray-300 block p-2">内容预览</span>
+        )}
       </div>
     </div>
   )
