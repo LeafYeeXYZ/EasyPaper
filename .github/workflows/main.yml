@@ -58,7 +58,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          # 不上传 .yml .yaml .blockmap
           files: |
             dist/*
           draft: false
