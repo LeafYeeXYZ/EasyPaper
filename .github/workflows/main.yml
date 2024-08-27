@@ -1,0 +1,62 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+    # Match any new tag
+      - '*'
+
+env:
+  # Necessary for most environments as build failure can occur due to OOM issues
+  NODE_OPTIONS: "--max-old-space-size=4096"
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    strategy:
+    # Failure in one platform build won't impact the others
+      fail-fast: false
+      matrix:
+        build:
+          # - name: 'windows-amd64'
+          #   platform:  'windows/amd64'
+          #   os: 'windows-latest'
+          # - name: 'windows-arm64'
+          #   platform:  'windows/arm64'
+          #   os: 'windows-latest'
+          # - name: 'mac-amd64'
+          #   platform:  'darwin/amd64'
+          #   os: 'macos-latest'
+          - name: 'Build'
+            platform:  'darwin/arm64'
+            os: 'macos-latest'
+
+    runs-on: ${{ matrix.build.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+      
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'
+
+      - name: Build
+        run: bun run build:both
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          # 不上传 .yml .yaml .blockmap
+          files: |
+            dist/* !dist/*.yml !dist/*.yaml !dist/*.blockmap
+          draft: false
+          prerelease: true

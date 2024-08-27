@@ -15,7 +15,7 @@ export default function Preview(): JSX.Element {
         style={{ scrollbarWidth: 'none' }}
       >
         {markdown ? (
-          <iframe className="w-full h-full p-8" srcDoc={html} />
+          <iframe className="w-full h-full p-8" srcDoc={html} sandbox="" />
         ) : (
           <span className="text-xs text-gray-300 block p-2">内容预览</span>
         )}

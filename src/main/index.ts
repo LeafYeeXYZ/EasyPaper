@@ -1,12 +1,14 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1000,
     height: 670,
     minWidth: 768,
     minHeight: 512,
@@ -51,8 +53,51 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
+  // IPC
+  ipcMain.handle('openBrowser', async (_, url: string) => {
+    await shell.openExternal(url)
+  })
+  ipcMain.handle('newPaper', async (): Promise<{ filepath: string; filename: string }> => {
+    // 弹出文件选择框
+    const { filePath, canceled } = await dialog.showSaveDialog({
+      title: '新建文档',
+      filters: [{ name: 'Markdown 文件', extensions: ['md'] }],
+      showsTagField: false,
+      properties: ['createDirectory']
+    })
+    if (canceled) {
+      return { filepath: '', filename: '' }
+    } else {
+      const filepath = path.dirname(filePath)
+      const filename = path.basename(filePath)
+      await fs.writeFile(filePath, '', 'utf-8')
+      return { filepath, filename }
+    }
+  })
+  ipcMain.handle(
+    'openPaper',
+    async (): Promise<{ filepath: string; filename: string; content: string }> => {
+      // 弹出文件选择框
+      const { filePaths, canceled } = await dialog.showOpenDialog({
+        title: '打开文档',
+        filters: [{ name: 'Markdown 文件', extensions: ['md'] }]
+      })
+      if (canceled) {
+        return { filepath: '', filename: '', content: '' }
+      } else {
+        const filepath = path.dirname(filePaths[0])
+        const filename = path.basename(filePaths[0])
+        const content = await fs.readFile(filePaths[0], 'utf-8')
+        return { filepath, filename, content }
+      }
+    }
+  )
+  ipcMain.handle(
+    'savePaper',
+    async (_, filepath: string, filename: string, content: string): Promise<void> => {
+      await fs.writeFile(path.resolve(filepath, filename), content, 'utf-8')
+    }
+  )
 
   createWindow()
 

@@ -2,7 +2,20 @@ import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  openBrowser: async (url: string): Promise<void> => {
+    await electronAPI.ipcRenderer.invoke('openBrowser', url)
+  },
+  newPaper: async (): Promise<{ filepath: string; filename: string }> => {
+    return await electronAPI.ipcRenderer.invoke('newPaper')
+  },
+  openPaper: async (): Promise<{ filepath: string; filename: string; content: string }> => {
+    return await electronAPI.ipcRenderer.invoke('openPaper')
+  },
+  savePaper: async (filepath: string, filename: string, content: string): Promise<void> => {
+    await electronAPI.ipcRenderer.invoke('savePaper', filepath, filename, content)
+  }
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
