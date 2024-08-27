@@ -3,6 +3,10 @@ import type { PDFOptions } from 'puppeteer'
 
 export interface MarkdownPaperTheme {
   /**
+   * 主题名称
+   */
+  themeName: string
+  /**
    * css 样式
    * 不含 \<style>\</style>
    */
@@ -33,7 +37,17 @@ export interface MarkdownPaperTheme {
   pdfOptions: PDFOptions
 }
 
+export const getTheme = (themeName: string): MarkdownPaperTheme => {
+  switch (themeName) {
+    case 'aps':
+      return APS
+    default:
+      return APS
+  }
+}
+
 export const APS: MarkdownPaperTheme = {
+  themeName: 'aps',
   css: `
     * {
       font-family: 'Times', 'Times New Roman', '宋体', 'SimSun', '华文宋体', 'STSong'; /* 所有数字和英文字体都用 Times New Roman */

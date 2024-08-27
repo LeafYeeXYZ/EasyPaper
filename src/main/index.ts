@@ -3,12 +3,16 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import fs from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 import path from 'node:path'
+import puppeteer from 'puppeteer'
+import { mdToHtml } from '../../lib/render'
+import { getTheme } from '../../lib/theme'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 905,
     height: 670,
     minWidth: 768,
     minHeight: 512,
@@ -96,6 +100,79 @@ app.whenReady().then(() => {
     'savePaper',
     async (_, filepath: string, filename: string, content: string): Promise<void> => {
       await fs.writeFile(path.resolve(filepath, filename), content, 'utf-8')
+    }
+  )
+  ipcMain.handle(
+    'createTextFile',
+    async (_, content: string, ext: string, defaultName: string): Promise<boolean> => {
+      // 弹出文件选择框
+      const { filePath, canceled } = await dialog.showSaveDialog({
+        title: '导出论文',
+        filters: [{ name: '文本文件', extensions: [ext] }],
+        defaultPath: defaultName + '.' + ext,
+        showsTagField: false,
+        properties: ['createDirectory']
+      })
+      if (canceled) {
+        return false
+      } else {
+        await fs.writeFile(filePath, content, 'utf-8')
+        return true
+      }
+    }
+  )
+  ipcMain.handle(
+    'embedImageIntoHtml',
+    async (_, html: string, filepath: string): Promise<string> => {
+      return html.replace(/<img src="(.+?)"/g, (match, p1) => {
+        if (p1.startsWith('http')) return match
+        try {
+          const url = path.resolve(filepath, decodeURI(p1))
+          const data = readFileSync(url).toString('base64')
+          return `<img src="data:image/${path.extname(p1).replace('.', '')};base64,${data}"`
+        } catch (_) {
+          return match
+        }
+      })
+    }
+  )
+  ipcMain.handle(
+    'createPdf',
+    async (
+      _,
+      markdown: string,
+      themeName: string = 'aps',
+      filepath: string,
+      filename: string
+    ): Promise<boolean> => {
+      const { filePath, canceled } = await dialog.showSaveDialog({
+        title: '导出论文',
+        filters: [{ name: 'PDF 文件', extensions: ['pdf'] }],
+        defaultPath: filename.split('.')[0] + '.pdf',
+        showsTagField: false,
+        properties: ['createDirectory']
+      })
+      if (canceled) {
+        return false
+      }
+      const dist = path.resolve(filePath)
+      const browser = await puppeteer.launch()
+      const page = await browser.newPage()
+      const theme = getTheme(themeName)
+      const html = (await mdToHtml(markdown, theme)).replace(/<img src="(.+?)"/g, (match, p1) => {
+        if (p1.startsWith('http')) return match
+        try {
+          const url = path.resolve(filepath, decodeURI(p1))
+          const data = readFileSync(url).toString('base64')
+          return `<img src="data:image/${path.extname(p1).replace('.', '')};base64,${data}"`
+        } catch (_) {
+          return match
+        }
+      })
+      await page.setContent(html)
+      await page.pdf({ path: dist, ...theme.pdfOptions })
+      await browser.close()
+      return true
     }
   )
 

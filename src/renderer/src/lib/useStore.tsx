@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { MarkdownPaperTheme, APS } from '../../../../resources/lib/theme'
+import { MarkdownPaperTheme, APS } from '../../../../lib/theme'
 import type { MessageInstance } from 'antd/es/message/interface'
 
 interface State {

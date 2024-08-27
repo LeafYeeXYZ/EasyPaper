@@ -3,17 +3,31 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  openBrowser: async (url: string): Promise<void> => {
-    await electronAPI.ipcRenderer.invoke('openBrowser', url)
+  openBrowser: (url: string): Promise<void> => {
+    return electronAPI.ipcRenderer.invoke('openBrowser', url)
   },
-  newPaper: async (): Promise<{ filepath: string; filename: string }> => {
-    return await electronAPI.ipcRenderer.invoke('newPaper')
+  newPaper: (): Promise<{ filepath: string; filename: string }> => {
+    return electronAPI.ipcRenderer.invoke('newPaper')
   },
-  openPaper: async (): Promise<{ filepath: string; filename: string; content: string }> => {
-    return await electronAPI.ipcRenderer.invoke('openPaper')
+  openPaper: (): Promise<{ filepath: string; filename: string; content: string }> => {
+    return electronAPI.ipcRenderer.invoke('openPaper')
   },
-  savePaper: async (filepath: string, filename: string, content: string): Promise<void> => {
-    await electronAPI.ipcRenderer.invoke('savePaper', filepath, filename, content)
+  savePaper: (filepath: string, filename: string, content: string): Promise<void> => {
+    return electronAPI.ipcRenderer.invoke('savePaper', filepath, filename, content)
+  },
+  createTextFile: (content: string, ext: string, defaultName: string): Promise<boolean> => {
+    return electronAPI.ipcRenderer.invoke('createTextFile', content, ext, defaultName)
+  },
+  embedImageIntoHtml: (html: string, filepath: string): Promise<string> => {
+    return electronAPI.ipcRenderer.invoke('embedImageIntoHtml', html, filepath)
+  },
+  createPdf: (
+    markdown: string,
+    themeName: string,
+    filepath: string,
+    filename: string
+  ): Promise<boolean> => {
+    return electronAPI.ipcRenderer.invoke('createPdf', markdown, themeName, filepath, filename)
   }
 }
 

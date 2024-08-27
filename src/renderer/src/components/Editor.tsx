@@ -2,7 +2,7 @@ import { Input } from 'antd'
 import { useStore } from '../lib/useStore'
 
 export default function Editor(): JSX.Element {
-  const { setMarkdown, filepath, filename, markdown } = useStore()
+  const { setMarkdown, filepath, filename, markdown, disabled } = useStore()
   return (
     <div className="p-2 pl-1 pt-0 w-full h-full overflow-hidden">
       <div
@@ -11,12 +11,14 @@ export default function Editor(): JSX.Element {
       >
         <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap">
           <span className="font-bold">
-            当前文件: <span className="font-normal">{filename || '...'}</span>
+            当前文件:&nbsp;&nbsp;
+            <span className="font-normal">{filename || '...'}</span>
           </span>
         </div>
         <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap">
           <span className="font-bold">
-            存放位置: <span className="font-normal">{filepath || '...'}</span>
+            存放位置:&nbsp;&nbsp;
+            <span className="font-normal">{filepath || '...'}</span>
           </span>
         </div>
         <Input.TextArea
@@ -28,7 +30,7 @@ export default function Editor(): JSX.Element {
           autoCapitalize="off"
           spellCheck={false}
           onChange={(e) => setMarkdown(e.target.value)}
-          disabled={filepath === '' || filename === ''}
+          disabled={filepath === '' || filename === '' || disabled}
           value={markdown}
         />
       </div>
