@@ -3,16 +3,16 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import fs from 'node:fs/promises'
-import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { mdToHtml } from '../../lib/render'
 import { getTheme } from '../../lib/theme'
+import { embedImageIntoHtml } from './utils'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 905,
-    height: 670,
+    height: 700,
     minWidth: 768,
     minHeight: 512,
     show: false,
@@ -120,21 +120,9 @@ app.whenReady().then(() => {
       }
     }
   )
-  ipcMain.handle(
-    'embedImageIntoHtml',
-    async (_, html: string, filepath: string): Promise<string> => {
-      return html.replace(/<img src="(.+?)"/g, (match, p1) => {
-        if (p1.startsWith('http')) return match
-        try {
-          const url = path.resolve(filepath, decodeURI(p1))
-          const data = readFileSync(url).toString('base64')
-          return `<img src="data:image/${path.extname(p1).replace('.', '')};base64,${data}"`
-        } catch (_) {
-          return match
-        }
-      })
-    }
-  )
+  ipcMain.handle('embedImageIntoHtml', (_, html: string, filepath: string): Promise<string> => {
+    return embedImageIntoHtml(html, filepath)
+  })
   ipcMain.handle(
     'createPdf',
     async (
@@ -156,16 +144,7 @@ app.whenReady().then(() => {
       }
       const theme = getTheme(themeName)
       const dist = path.resolve(filePath)
-      const html = (await mdToHtml(markdown, theme)).replace(/<img src="(.+?)"/g, (match, p1) => {
-        if (p1.startsWith('http')) return match
-        try {
-          const url = path.resolve(filepath, decodeURI(p1))
-          const data = readFileSync(url).toString('base64')
-          return `<img src="data:image/${path.extname(p1).replace('.', '')};base64,${data}"`
-        } catch (_) {
-          return match
-        }
-      })
+      const html = await embedImageIntoHtml(await mdToHtml(markdown, theme), filepath)
       const win = new BrowserWindow()
       const temp = path.resolve(filepath, 'easy_paper_temp_file.html')
       await fs.writeFile(temp, html)

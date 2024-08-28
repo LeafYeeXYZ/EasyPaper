@@ -9,6 +9,8 @@ interface State {
   setTheme: (theme: MarkdownPaperTheme) => void
   markdown: string
   setMarkdown: (markdown: string) => void
+  savedMarkdown: string
+  setSavedMarkdown: (savedMarkdown: string) => void
   filepath: string
   setFilepath: (filepath: string) => void
   filename: string
@@ -24,6 +26,8 @@ export const useStore = create<State>()((set) => ({
   setTheme: (theme): void => set({ theme }),
   markdown: '',
   setMarkdown: (markdown): void => set({ markdown }),
+  savedMarkdown: '',
+  setSavedMarkdown: (savedMarkdown): void => set({ savedMarkdown }),
   filepath: '',
   setFilepath: (filepath): void => set({ filepath }),
   filename: '',

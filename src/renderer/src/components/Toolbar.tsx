@@ -21,6 +21,8 @@ export default function Toolbar(): JSX.Element {
     setMarkdown,
     messageApi,
     markdown,
+    savedMarkdown,
+    setSavedMarkdown,
     theme,
     disabled,
     setDisabled
@@ -35,6 +37,7 @@ export default function Toolbar(): JSX.Element {
           setFilename(filename)
           setFilepath(filepath)
           setMarkdown('')
+          setSavedMarkdown('')
         }}
       >
         <FileAddOutlined /> 新建
@@ -47,16 +50,21 @@ export default function Toolbar(): JSX.Element {
           setFilename(filename)
           setFilepath(filepath)
           setMarkdown(content)
+          setSavedMarkdown(content)
         }}
       >
         <FolderOpenOutlined /> 打开
       </Button>
       <Button
+        type={markdown === savedMarkdown ? 'default' : 'primary'}
         disabled={!filepath || !filename || !markdown.length || !messageApi || disabled}
         onClick={async () => {
           await window.api
             .savePaper(filepath, filename, markdown)
-            .then(() => messageApi!.success('保存成功'))
+            .then(() => {
+              setSavedMarkdown(markdown)
+              messageApi!.success('保存成功')
+            })
             .catch(() => messageApi!.error('保存失败'))
         }}
       >
