@@ -1,14 +1,27 @@
 /* eslint-disable no-irregular-whitespace */
 import type { PrintToPDFOptions } from 'electron'
 
+/**
+ * 论文模板
+ *
+ * 任何实现了这个接口的对象都可以作为主题使用
+ *
+ * 定义主题并导出后需要在 utils.ts 中导入并添加到 THEMES 数组
+ */
 export interface MarkdownPaperTheme {
   /**
-   * 主题名称
+   * 主题的英文简称
+   * @example 'aps'
    */
   themeName: string
   /**
+   * 主题的中文名称
+   * @example '心理学报'
+   */
+  chineseName: string
+  /**
    * css 样式
-   * 不含 \<style>\</style>
+   * 不含 \<style>\</style> 标签
    */
   css: string
   /**
@@ -26,28 +39,14 @@ export interface MarkdownPaperTheme {
    */
   preParseHTML(html: string): Promise<string>
   /**
-   * 在网页中要执行的函数
-   * 将在保存 html 文件后调用
-   */
-  script(): void
-  /**
    * PDF 参数
-   * 无需设置路径
    */
   pdfOptions: PrintToPDFOptions
 }
 
-export const getTheme = (themeName: string): MarkdownPaperTheme => {
-  switch (themeName) {
-    case 'aps':
-      return APS
-    default:
-      return APS
-  }
-}
-
 export const APS: MarkdownPaperTheme = {
   themeName: 'aps',
+  chineseName: '心理学报',
   css: `
     * {
       font-family: 'Times', 'Times New Roman', '宋体', 'SimSun', '华文宋体', 'STSong'; /* 所有数字和英文字体都用 Times New Roman */
@@ -216,6 +215,5 @@ export const APS: MarkdownPaperTheme = {
     displayHeaderFooter: true,
     headerTemplate: `<div></div>`,
     footerTemplate: `<div style="font-size: 9px; font-family: 'SimSun'; color: #333; padding: 5px; margin: 0 auto;">第 <span class="pageNumber"></span> 页 / 共 <span class="totalPages"></span> 页</div>`
-  },
-  script: () => {}
+  }
 }

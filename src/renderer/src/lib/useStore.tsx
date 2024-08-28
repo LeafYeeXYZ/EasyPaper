@@ -1,5 +1,6 @@
 import { create } from 'zustand'
-import { MarkdownPaperTheme, APS } from '../../../../lib/theme'
+import { MarkdownPaperTheme } from '../../../../lib/theme'
+import { getDefalutTheme } from '../../../../lib/utils'
 import type { MessageInstance } from 'antd/es/message/interface'
 
 interface State {
@@ -22,7 +23,7 @@ interface State {
 export const useStore = create<State>()((set) => ({
   disabled: false,
   setDisabled: (disabled): void => set({ disabled }),
-  theme: APS,
+  theme: getDefalutTheme(),
   setTheme: (theme): void => set({ theme }),
   markdown: '',
   setMarkdown: (markdown): void => set({ markdown }),

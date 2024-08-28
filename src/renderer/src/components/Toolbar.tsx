@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons'
 import { useStore } from '../lib/useStore'
 import { mdToHtml } from '../../../../lib/render'
+import { getTheme, getThemeMeta, getDefalutTheme } from '../../../../lib/utils'
 import { flushSync } from 'react-dom'
 
 export default function Toolbar(): JSX.Element {
@@ -24,6 +25,7 @@ export default function Toolbar(): JSX.Element {
     savedMarkdown,
     setSavedMarkdown,
     theme,
+    setTheme,
     disabled,
     setDisabled
   } = useStore()
@@ -131,8 +133,16 @@ export default function Toolbar(): JSX.Element {
         <FileTextOutlined /> HTML
       </Button>
       <p className="text-xs px-1 font-bold text-nowrap text-gray-600">论文格式:</p>
-      <Select defaultValue="aps" disabled={disabled}>
-        <Select.Option value="aps">心理学报</Select.Option>
+      <Select
+        defaultValue={getDefalutTheme().themeName}
+        disabled={disabled}
+        onChange={(value) => setTheme(getTheme(value))}
+      >
+        {getThemeMeta().map((theme) => (
+          <Select.Option key={theme.themeName} value={theme.themeName}>
+            {theme.chineseName}
+          </Select.Option>
+        ))}
       </Select>
       &nbsp;
     </div>

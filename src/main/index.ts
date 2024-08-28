@@ -5,7 +5,7 @@ import icon from '../../resources/icon.png?asset'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { mdToHtml } from '../../lib/render'
-import { getTheme } from '../../lib/theme'
+import { getTheme } from '../../lib/utils'
 import { embedImageIntoHtml } from './utils'
 
 function createWindow(): void {
