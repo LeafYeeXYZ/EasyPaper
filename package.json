@@ -1,10 +1,10 @@
 {
   "name": "easy-paper",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "The easist way to write academic papers",
   "main": "./out/main/index.js",
-  "author": "example.com",
-  "homepage": "https://electron-vite.org",
+  "author": "github.com/LeafYeeXYZ",
+  "homepage": "https://github.com/LeafYeeXYZ/EasyPaper",
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
