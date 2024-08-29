@@ -7,6 +7,7 @@
   "homepage": "https://github.com/LeafYeeXYZ/EasyPaper",
   "scripts": {
     "format": "prettier --write .",
+    "version": "commit-and-tag-version",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
     "typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
@@ -38,6 +39,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "commit-and-tag-version": "^12.4.2",
     "electron": "^31.4.0",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.3.0",
