@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.1.0...v1.2.0) (2024-08-31)
+
+
+### Features
+
+* 支持数学公式 ([5a5f3a7](https://github.com/LeafYeeXYZ/EasyPaper/commit/5a5f3a72420c22cb675a88e256922f02d1278869))
+
 ## 1.1.0 (2024-08-29)
 
 
