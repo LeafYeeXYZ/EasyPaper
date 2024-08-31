@@ -98,7 +98,7 @@ $$
 附录可以放图片、表格等等等等
 ```
 
-> 数学公式语法详见 [https://katex.org](https://katex.org)
+> 数学公式语法详见 [https://katex.org](https://katex.org) 和[这篇中文文章](https://kissingfire123.github.io/2022/02/18_数学公式katex常用语法总结)
 
 ### 4 导出论文
 
