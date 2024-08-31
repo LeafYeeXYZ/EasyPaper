@@ -28,6 +28,7 @@
     "@electron-toolkit/utils": "^3.0.0",
     "antd": "^5.20.3",
     "marked": "^14.1.0",
+    "marked-katex-extension": "^5.1.1",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
