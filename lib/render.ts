@@ -1,7 +1,8 @@
 import { marked } from 'marked'
 import { MarkdownPaperTheme } from './theme'
 import markedKatex from 'marked-katex-extension'
-import katexCss from 'katex/dist/katex.css?raw'
+// 使用 from 'katex/dist/katex.css?raw' 会报错
+import katexCss from './katex.css?raw'
 
 export async function mdToHtml(md: string, theme: MarkdownPaperTheme): Promise<string> {
   let content: string
@@ -16,7 +17,7 @@ export async function mdToHtml(md: string, theme: MarkdownPaperTheme): Promise<s
       <meta charset="UTF-8">
       <title>预览</title>
       <style>${theme.css}</style>
-      <style>${`\n${katexCss}`}</style>
+      <style>${`\n${katexCss}\n`}</style>
       <style>
         * { scrollbar-width: none; }
       </style>
