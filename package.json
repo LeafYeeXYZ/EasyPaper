@@ -1,6 +1,6 @@
 {
   "name": "easy-paper",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The easist way to write academic papers",
   "main": "./out/main/index.js",
   "author": "github.com/LeafYeeXYZ",

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.1](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.2.0...v1.2.1) (2024-09-01)
+
+
+### Bug Fixes
+
+* 修复导入的依赖不存在的问题 ([47c625c](https://github.com/LeafYeeXYZ/EasyPaper/commit/47c625cca152234e983355d288537024ffaff188))
+
 ## [1.2.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.1.0...v1.2.0) (2024-08-31)
 
 
