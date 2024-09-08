@@ -1,8 +1,29 @@
 import { Input } from 'antd'
 import { useStore } from '../lib/useStore'
+import { useRef } from 'react'
 
 export default function Editor(): JSX.Element {
-  const { setMarkdown, filepath, filename, markdown, disabled } = useStore()
+  const timer = useRef<NodeJS.Timeout | null>(null)
+  const debounce = (fn: () => void, delay: number): void => {
+    if (timer.current) {
+      clearTimeout(timer.current)
+    }
+    timer.current = setTimeout(() => {
+      fn()
+    }, delay)
+  }
+  const {
+    setMarkdown,
+    filepath,
+    filename,
+    markdown,
+    disabled,
+    autoSave,
+    notificationApi,
+    setSavedMarkdown,
+    messageApi,
+    getNotificationConfig
+  } = useStore()
   return (
     <div className="p-2 pl-1 pt-0 w-full h-full overflow-hidden">
       <div
@@ -29,7 +50,20 @@ export default function Editor(): JSX.Element {
           autoComplete="off"
           autoCapitalize="off"
           spellCheck={false}
-          onChange={(e) => setMarkdown(e.target.value)}
+          onChange={(e) => {
+            // 无操作 1S 后保存
+            autoSave &&
+              debounce(async () => {
+                await window.api
+                  .savePaper(filepath, filename, e.target.value)
+                  .then(() => {
+                    setSavedMarkdown(e.target.value)
+                    notificationApi?.success(getNotificationConfig())
+                  })
+                  .catch(() => messageApi?.error('保存失败'))
+              }, 1500)
+            setMarkdown(e.target.value)
+          }}
           disabled={filepath === '' || filename === '' || disabled}
           value={markdown}
         />

@@ -1,16 +1,20 @@
 import Editor from './components/Editor'
 import Preview from './components/Preview'
 import Toolbar from './components/Toolbar'
-import { ConfigProvider, message } from 'antd'
+import { ConfigProvider, message, notification } from 'antd'
 import { useStore } from './lib/useStore'
 import { useEffect } from 'react'
 
 function App(): JSX.Element {
-  const [messageApi, contextHolder] = message.useMessage()
-  const { setMessageApi } = useStore()
+  const { setMessageApi, setNotificationApi } = useStore()
+  const [messageApi, messageContextHolder] = message.useMessage()
   useEffect(() => {
     setMessageApi(messageApi)
   }, [messageApi, setMessageApi])
+  const [notificationApi, notificationContextHolder] = notification.useNotification()
+  useEffect(() => {
+    setNotificationApi(notificationApi)
+  }, [notificationApi, setNotificationApi])
   return (
     <main className="w-dvw h-dvh absolute grid grid-rows-[3rem,1fr] overflow-hidden">
       <ConfigProvider
@@ -28,7 +32,8 @@ function App(): JSX.Element {
           <Preview />
           <Editor />
         </div>
-        {contextHolder}
+        {messageContextHolder}
+        {notificationContextHolder}
       </ConfigProvider>
     </main>
   )

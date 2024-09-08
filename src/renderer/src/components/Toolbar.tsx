@@ -1,4 +1,4 @@
-import { Button, Select } from 'antd'
+import { Button, Select, Switch } from 'antd'
 import {
   FileAddOutlined,
   FolderOpenOutlined,
@@ -27,7 +27,11 @@ export default function Toolbar(): JSX.Element {
     theme,
     setTheme,
     disabled,
-    setDisabled
+    setDisabled,
+    setAutoSave,
+    autoSave,
+    notificationApi,
+    getNotificationConfig
   } = useStore()
   return (
     <div className="h-full w-full flex justify-start items-center gap-2 px-2">
@@ -65,7 +69,7 @@ export default function Toolbar(): JSX.Element {
             .savePaper(filepath, filename, markdown)
             .then(() => {
               setSavedMarkdown(markdown)
-              messageApi!.success('保存成功')
+              notificationApi?.success(getNotificationConfig())
             })
             .catch(() => messageApi!.error('保存失败'))
         }}
@@ -144,6 +148,29 @@ export default function Toolbar(): JSX.Element {
           </Select.Option>
         ))}
       </Select>
+      <p className="text-xs px-1 font-bold text-nowrap text-gray-600">设置:</p>
+      <Switch
+        checkedChildren="自动保存"
+        unCheckedChildren="自动保存"
+        checked={autoSave}
+        className="min-w-max"
+        onChange={(checked) => {
+          if (checked) {
+            setAutoSave(true)
+            if (savedMarkdown !== markdown) {
+              window.api
+                .savePaper(filepath, filename, markdown)
+                .then(() => {
+                  setSavedMarkdown(markdown)
+                  notificationApi?.success(getNotificationConfig())
+                })
+                .catch(() => messageApi!.error('保存失败'))
+            }
+          } else {
+            setAutoSave(false)
+          }
+        }}
+      />
       &nbsp;
     </div>
   )

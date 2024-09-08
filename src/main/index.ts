@@ -11,7 +11,7 @@ import { embedImageIntoHtml } from './utils'
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 905,
+    width: 1040,
     height: 700,
     minWidth: 768,
     minHeight: 512,
