@@ -119,6 +119,7 @@ $$
 本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 如果您想参与开发新模板, 请在 `/lib/themes.ts` 中定义并导出类型为 `MarkdownPaperTheme` 的对象, 并在 `/lib/utils.ts` 导入并将其添加到 `THEMES` 数组中
 
 - [ ] 支持更多的论文格式
+- [ ] 文章进度跟随 (Markdown编辑器和HTML预览器匹配)
 - [x] 支持插入 LaTeX 公式
 - [ ] 独立的参考文献管理
 - [ ] AI 文章润色和参考文献查询 (基于本地 ollama)
