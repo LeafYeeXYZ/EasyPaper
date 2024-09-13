@@ -20,7 +20,7 @@
 
 ![](./readme/2.png)
 
-> 由于作者没钱开通 `Apple Developer` 账号, 所以 `MacOS` 下可能提示软件已损坏, 请参见[这篇文章](https://www.mac2m.com/article/450/)修复; 如果您熟悉 `Node.js`, 也可自行构建, 参见 `package.json` 文件
+> 由于作者没钱开通 `Apple Developer` 账号, 所以 `MacOS` 下可能提示软件已损坏, 请参见[这篇文章](https://www.mac2m.com/article/450/)修复; 如果您熟悉 `Node.js`, 也可自行编译, 参见文末
 
 ### 2 新建文档
 
@@ -112,7 +112,7 @@ $$
 
 ## 未来展望
 
-本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 如果您想参与开发新模板, 请在 `/lib/themes.ts` 中定义并导出类型为 `MarkdownPaperTheme` 的对象, 并在 `/lib/utils.ts` 导入并将其添加到 `THEMES` 数组中
+本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 如果您想**参与开发新论文模板**, 请在 `/lib/themes.ts` 中定义并导出类型为 `MarkdownPaperTheme` 的对象, 并在 `/lib/utils.ts` 导入并将其添加到 `THEMES` 数组中
 
 - [ ] 支持更多的论文格式
 - [ ] 文章进度跟随 (Markdown编辑器和HTML预览器匹配)
@@ -120,3 +120,35 @@ $$
 - [ ] 独立的参考文献管理
 - [ ] AI 文章润色和参考文献查询 (基于本地 ollama)
 - [ ] 给软件弄一个漂亮的图标
+
+## 开发说明
+
+在开始前, 请自行安装 `Node.js`, 推荐安装 [`Bun`](https://bun.sh) 作为包管理工具
+
+```bash
+# 1 克隆项目
+git clone https://github.com/LeafYeeXYZ/EasyPaper.git
+
+# 2 进入项目目录
+cd ./EasyPaper
+
+# 3 安装依赖
+bun install # 或 npm install
+
+# 4 开发和构建
+
+# 4.1 开发
+bun dev # 或 npm run dev
+
+# 4.2 构建 Windows 和 macOS 应用
+bun build:both # 或 npm run build:both
+```
+
+#### 项目结构
+
+- `lib`: 存放论文模板(主题)相关内容, 被 `main`、`preload`、`renderer` 共用 (注意兼容性)
+- `src/main`: 主进程
+- `src/preload`: 预加载脚本
+- `src/renderer`: 渲染进程
+- `readme`: 存放 `README.md` 中的图片
+- `resources`: 存放软件图标
