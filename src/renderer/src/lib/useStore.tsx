@@ -22,6 +22,7 @@ interface State {
   setMarkdown: (markdown: string) => void
   savedMarkdown: string
   setSavedMarkdown: (savedMarkdown: string) => void
+  tagedMarkdown: string
   filepath: string
   setFilepath: (filepath: string) => void
   filename: string
@@ -44,7 +45,30 @@ export const useStore = create<State>()((set) => ({
   setTheme: (theme): void => set({ theme }),
   // 当前输入内容
   markdown: '',
-  setMarkdown: (markdown): void => set({ markdown }),
+  setMarkdown: (markdown): void =>
+    set((state) => {
+      const tagElement: string = '<span id="markdown_paper_input_target"></span>'
+      if (!state.tagedMarkdown.length || !state.markdown.length) {
+        return {
+          tagedMarkdown: `${markdown}\n${tagElement}`,
+          markdown
+        }
+      } else {
+        let tagedMarkdown: string = ''
+        let index: number = 0
+        while (state.markdown[index] === markdown[index]) {
+          tagedMarkdown += markdown[index]
+          index++
+        }
+        tagedMarkdown += `${tagElement}${markdown.slice(index)}`
+        return {
+          tagedMarkdown,
+          markdown
+        }
+      }
+    }),
+  // 在输入进度插入 <span id="markdown_paper_input_target"></span>
+  tagedMarkdown: '',
   // 本地文件内容
   savedMarkdown: '',
   setSavedMarkdown: (savedMarkdown): void => set({ savedMarkdown }),
