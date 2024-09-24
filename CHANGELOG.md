@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.4.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.3.0...v1.4.0) (2024-09-24)
+
+
+### Features
+
+* 预览页面自动滚动到输入处 ([180e7dc](https://github.com/LeafYeeXYZ/EasyPaper/commit/180e7dc1ef40da6e96372a601b36cd10de04721c))
+
 ## [1.3.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.2.1...v1.3.0) (2024-09-08)
 
 
