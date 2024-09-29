@@ -4,7 +4,7 @@
 
 ![](./readme/0.png)
 
-## 前言
+## 1 前言
 
 本软件旨在解决大学新生最头疼的问题之一: 调整论文格式, 帮助初学者更多地把精力放在写作本身上. 它基于十分简单的 Markdown 语法 (哪怕你没听过, 参考下面的示例也能马上上手), 通过图形界面实时预览, 并一键导出指定格式的学术论文
 
@@ -12,9 +12,9 @@
 
 如果你有一定的计算机基础, 也推荐您使用命令行程序 [MarkdownPaper](https://github.com/LeafYeeXYZ/MarkdownPaper), 它的处理逻辑与本软件基本一致, 但更加灵活和强大 (如支持导出 DOCX 文件), 您还可以使用任何您喜欢的编辑器撰写学术论文
 
-## 使用方法
+## 2 使用方法
 
-### 1 下载安装
+### 2.1 下载安装
 
 ![](./readme/1.png)
 
@@ -22,13 +22,13 @@
 
 > 由于作者没钱开通 `Apple Developer` 账号, 所以 `MacOS` 下可能提示软件已损坏, 请参见[这篇文章](https://www.mac2m.com/article/450/)修复; 如果您熟悉 `Node.js`, 也可自行编译, 参见文末
 
-### 2 新建文档
+### 2.2 新建文档
 
 ![](./readme/3.png)
 
 ![](./readme/4.png)
 
-### 3 写论文
+### 2.3 写论文
 
 书写格式如下:
 
@@ -106,24 +106,25 @@ $$
 
 > 数学公式语法详见 [https://katex.org](https://katex.org) 和[这篇中文文章](https://kissingfire123.github.io/2022/02/18_数学公式katex常用语法总结)
 
-### 4 导出论文
+### 2.4 导出论文
 
 ![](./readme/5.png)
 
-## 未来展望
+## 3 开发说明
 
-本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 如果您想**参与开发新论文模板**, 请在 `/lib/themes.ts` 中定义并导出类型为 `MarkdownPaperTheme` 的对象, 并在 `/lib/utils.ts` 导入并将其添加到 `THEMES` 数组中
+### 3.1 主题开发
+
+如果您想**参与开发新论文模板**, 请在 `/lib/themes.ts` 中定义并导出类型为 `MarkdownPaperTheme` 的对象, 并在 `/lib/utils.ts` 导入并将其添加到 `THEMES` 数组中
+
+### 3.2 未来计划
 
 - [ ] 支持更多的论文格式
-- [x] 文章进度跟随 (Markdown编辑器和HTML预览器匹配)
-- [x] 支持插入 LaTeX 公式
-- [ ] 独立的参考文献管理
-- [ ] AI 文章润色和参考文献查询 (基于本地 ollama)
+- [ ] 黑暗模式
 - [ ] 给软件弄一个漂亮的图标
 
-## 开发说明
+### 3.3 本地开发
 
-在开始前, 请自行安装 `Node.js`, 推荐安装 [`Bun`](https://bun.sh) 作为包管理工具
+本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 在开始前, 请自行安装 `Node.js`, 推荐安装 [`Bun`](https://bun.sh) 作为包管理工具
 
 ```bash
 # 1 克隆项目
@@ -144,7 +145,7 @@ bun dev # 或 npm run dev
 bun build:both # 或 npm run build:both
 ```
 
-#### 项目结构
+### 3.4 文件结构
 
 - `lib`: 存放论文模板(主题)相关内容, 被 `main`、`preload`、`renderer` 共用 (注意兼容性)
 - `src/main`: 主进程
@@ -152,3 +153,7 @@ bun build:both # 或 npm run build:both
 - `src/renderer`: 渲染进程
 - `readme`: 存放 `README.md` 中的图片
 - `resources`: 存放软件图标
+
+## 4 致谢
+
+感谢[蟹黄]()为本软件绘制了可爱的图标!
