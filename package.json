@@ -3,8 +3,25 @@
   "version": "1.4.0",
   "description": "The easist way to write academic papers",
   "main": "./out/main/index.js",
-  "author": "github.com/LeafYeeXYZ",
+  "author": "LeafYeeXYZ",
   "homepage": "https://github.com/LeafYeeXYZ/EasyPaper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeafYeeXYZ/EasyPaper"
+  },
+  "license": "GPL-3.0-only",
+  "keywords": [
+    "electron",
+    "vite",
+    "react",
+    "typescript",
+    "markdown",
+    "latex",
+    "katex",
+    "academic",
+    "paper",
+    "editor"
+  ],
   "scripts": {
     "format": "prettier --write .",
     "version": "commit-and-tag-version",
@@ -24,12 +41,12 @@
     "build:both": "electron-vite build && electron-builder --mac --arm64 && electron-builder --win --x64"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.4.0",
+    "@ant-design/icons": "^5.5.1",
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
-    "antd": "^5.20.5",
+    "antd": "^5.21.1",
     "katex": "^0.16.11",
-    "marked": "^14.1.1",
+    "marked": "^14.1.2",
     "marked-katex-extension": "^5.1.2",
     "zustand": "^4.5.5"
   },
@@ -37,23 +54,23 @@
     "@electron-toolkit/eslint-config-prettier": "^2.0.0",
     "@electron-toolkit/eslint-config-ts": "^2.0.0",
     "@electron-toolkit/tsconfig": "^1.0.1",
-    "@types/node": "^20.16.5",
-    "@types/react": "^18.3.5",
+    "@types/node": "^20.16.10",
+    "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
-    "commit-and-tag-version": "^12.4.2",
-    "electron": "^31.5.0",
+    "commit-and-tag-version": "^12.4.4",
+    "electron": "^31.6.0",
     "electron-builder": "^24.13.3",
     "electron-vite": "^2.3.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.35.2",
-    "postcss": "^8.4.45",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.0",
+    "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwindcss": "^3.4.10",
-    "typescript": "^5.5.4",
-    "vite": "^5.4.3"
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8"
   }
 }

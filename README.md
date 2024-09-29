@@ -124,7 +124,7 @@ $$
 
 ### 3.3 本地开发
 
-本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 在开始前, 请自行安装 `Node.js`, 推荐安装 [`Bun`](https://bun.sh) 作为包管理工具
+本软件的技术栈为 `Electron(Electron Vite)` + `React` + `TailwindCSS` + `Ant Design`; 在开始前, 请自行安装 `Node.js` (推荐安装最新的 `LTS` 版本), 推荐使用 [`Bun`](https://bun.sh) 作为包管理工具
 
 ```bash
 # 1 克隆项目
