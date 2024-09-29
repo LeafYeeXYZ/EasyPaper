@@ -1,5 +1,5 @@
 appId: com.leafyeexyz.easy-paper
-productName: easy-paper
+productName: EasyPaper
 directories:
   buildResources: build
 files:
@@ -41,3 +41,4 @@ npmRebuild: false
 publish:
   provider: generic
   url: https://example.com/auto-updates
+icon: resources/icon.png
