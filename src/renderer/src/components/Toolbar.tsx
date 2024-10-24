@@ -84,7 +84,7 @@ export default function Toolbar(): JSX.Element {
       >
         <QuestionCircleOutlined /> 帮助
       </Button>
-      <p className="text-xs px-1 font-bold text-nowrap text-gray-600">导出:</p>
+      <p className="text-xs px-1 font-bold text-nowrap text-gray-600 dark:text-white">导出:</p>
       <Button
         disabled={!filepath || !filename || !markdown.length || !messageApi || disabled}
         onClick={async () => {
@@ -136,7 +136,7 @@ export default function Toolbar(): JSX.Element {
       >
         <FileTextOutlined /> HTML
       </Button>
-      <p className="text-xs px-1 font-bold text-nowrap text-gray-600">论文格式:</p>
+      <p className="text-xs px-1 font-bold text-nowrap text-gray-600 dark:text-white">论文格式:</p>
       <Select
         defaultValue={getDefalutTheme().themeName}
         disabled={disabled}
@@ -148,7 +148,7 @@ export default function Toolbar(): JSX.Element {
           </Select.Option>
         ))}
       </Select>
-      <p className="text-xs px-1 font-bold text-nowrap text-gray-600">设置:</p>
+      <p className="text-xs px-1 font-bold text-nowrap text-gray-600 dark:text-white">设置:</p>
       <Switch
         checkedChildren="自动保存"
         unCheckedChildren="自动保存"

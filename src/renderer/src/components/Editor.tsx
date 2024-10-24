@@ -27,23 +27,23 @@ export default function Editor(): JSX.Element {
   return (
     <div className="p-2 pl-1 pt-0 w-full h-full overflow-hidden">
       <div
-        className="border w-full h-full p-2 rounded-md shadow-md overflow-auto"
+        className="border w-full h-full p-2 rounded-md shadow-md overflow-auto dark:bg-gray-900 dark:border-black"
         style={{ scrollbarWidth: 'none' }}
       >
-        <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap">
+        <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap dark:bg-gray-800 dark:border-black dark:text-white">
           <span className="font-bold">
             当前文件:&nbsp;&nbsp;
             <span className="font-normal">{filename || '...'}</span>
           </span>
         </div>
-        <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap">
+        <div className="w-full h-8 p-2 mb-2 border rounded-md shadow-sm bg-gray-50 text-xs text-gray-500 text-ellipsis overflow-hidden text-nowrap dark:bg-gray-800 dark:border-black dark:text-white">
           <span className="font-bold">
             存放位置:&nbsp;&nbsp;
             <span className="font-normal">{filepath || '...'}</span>
           </span>
         </div>
         <Input.TextArea
-          className="h-full w-full"
+          className="h-full w-full dark:bg-gray-800 dark:border-black dark:text-white"
           placeholder="在这里输入论文内容"
           autoSize={true}
           autoCorrect="off"

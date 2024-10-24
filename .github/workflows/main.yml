@@ -3,19 +3,19 @@ name: Build and Release
 on:
   push:
     tags:
-    # Match any new tag
+      # Match any new tag
       - '*'
 
 env:
   # Necessary for most environments as build failure can occur due to OOM issues
-  NODE_OPTIONS: "--max-old-space-size=4096"
+  NODE_OPTIONS: '--max-old-space-size=4096'
 
 jobs:
   build:
     permissions:
       contents: write
     strategy:
-    # Failure in one platform build won't impact the others
+      # Failure in one platform build won't impact the others
       fail-fast: false
       matrix:
         build:
@@ -29,7 +29,7 @@ jobs:
           #   platform:  'darwin/amd64'
           #   os: 'macos-latest'
           - name: 'Build'
-            platform:  'darwin/arm64'
+            platform: 'darwin/arm64'
             os: 'macos-latest'
 
     runs-on: ${{ matrix.build.os }}
@@ -38,12 +38,12 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: recursive
-      
+
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
           node-version: '22'
-      
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:

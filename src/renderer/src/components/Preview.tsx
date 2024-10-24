@@ -29,11 +29,15 @@ export default function Preview(): JSX.Element {
   return (
     <div className="p-2 pr-1 pt-0 w-full h-full overflow-hidden">
       <div
-        className="border w-full h-full rounded-md shadow-md overflow-auto"
+        className="border w-full h-full rounded-md shadow-md overflow-auto dark:bg-gray-800 dark:border-black"
         style={{ scrollbarWidth: 'none' }}
       >
         {tagedMarkdown ? (
-          <iframe className="w-full h-full p-8" srcDoc={html} sandbox="allow-scripts" />
+          <iframe
+            className="w-full h-full p-8 bg-white dark:filter dark:brightness-[0.8]"
+            srcDoc={html}
+            sandbox="allow-scripts"
+          />
         ) : (
           <span className="text-xs text-gray-300 block p-2">论文内容预览</span>
         )}
