@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.5.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.4.1...v1.5.0) (2024-10-24)
+
+
+### Features
+
+* 黑暗模式 ([f7ceaac](https://github.com/LeafYeeXYZ/EasyPaper/commit/f7ceaacb2559c7da2d491facd47bb52fb9065987))
+
 ## [1.4.1](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.4.0...v1.4.1) (2024-09-29)
 
 ## [1.4.0](https://github.com/LeafYeeXYZ/EasyPaper/compare/v1.3.0...v1.4.0) (2024-09-24)
