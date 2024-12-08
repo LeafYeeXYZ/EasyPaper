@@ -7,6 +7,7 @@ import path from 'node:path'
 import { mdToHtml } from '../../lib/render'
 import { getTheme } from '../../lib/utils'
 import { embedImageIntoHtml } from './utils'
+import { asBlob } from 'html-docx-js-typescript'
 
 function createWindow(): void {
   // Create the browser window.
@@ -155,6 +156,44 @@ app.whenReady().then(() => {
       await fs.writeFile(dist, pdf)
       await fs.rm(temp)
       win.close()
+      return true
+    }
+  )
+  ipcMain.handle(
+    'createDocx',
+    async (
+      _,
+      markdown: string,
+      themeName: string = 'aps',
+      filepath: string,
+      filename: string
+    ): Promise<boolean> => {
+      const { response } = await dialog.showMessageBox({
+        type: 'warning',
+        title: '导出 Word',
+        message:
+          '导出的 DOCX 文件可能存在部分样式丢失，请手动调整或或选择导出为 PDF 文件. 是否继续？',
+        buttons: ['取消', '继续']
+      })
+      if (response === 0) {
+        return false
+      }
+      const { filePath, canceled } = await dialog.showSaveDialog({
+        title: '导出论文',
+        filters: [{ name: 'Word 文件', extensions: ['docx'] }],
+        defaultPath: filename.split('.')[0] + '.docx',
+        showsTagField: false,
+        properties: ['createDirectory']
+      })
+      if (canceled) {
+        return false
+      }
+      const theme = getTheme(themeName)
+      const dist = path.resolve(filePath)
+      const html = await embedImageIntoHtml(await mdToHtml(markdown, theme), filepath)
+      const docx = await asBlob(html)
+      const docxBuffer = Buffer.from(docx instanceof Blob ? await docx.arrayBuffer() : docx)
+      await fs.writeFile(dist, docxBuffer)
       return true
     }
   )

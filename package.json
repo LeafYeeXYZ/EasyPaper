@@ -45,6 +45,7 @@
     "@electron-toolkit/preload": "^3.0.1",
     "@electron-toolkit/utils": "^3.0.0",
     "antd": "^5.21.1",
+    "html-docx-js-typescript": "^0.1.5",
     "katex": "^0.16.11",
     "marked": "^14.1.2",
     "marked-katex-extension": "^5.1.2",

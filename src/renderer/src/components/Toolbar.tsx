@@ -6,7 +6,8 @@ import {
   QuestionCircleOutlined,
   FileMarkdownOutlined,
   FilePdfOutlined,
-  FileTextOutlined
+  FileTextOutlined,
+  FileWordOutlined
 } from '@ant-design/icons'
 import { useStore } from '../lib/useStore'
 import { mdToHtml } from '../../../../lib/render'
@@ -135,6 +136,31 @@ export default function Toolbar(): JSX.Element {
         }}
       >
         <FileTextOutlined /> HTML
+      </Button>
+      <Button
+        disabled={!filepath || !filename || !markdown.length || !messageApi || disabled}
+        onClick={async () => {
+          flushSync(() => setDisabled(true))
+          messageApi!.open({
+            content: '导出中...',
+            type: 'loading',
+            duration: 0,
+            key: 'exporting'
+          })
+          await window.api
+            .createDocx(markdown, theme.themeName, filepath, filename)
+            .then((res) => {
+              messageApi!.destroy()
+              res && messageApi!.success('导出成功')
+            })
+            .catch(() => {
+              messageApi!.destroy()
+              messageApi!.error('导出失败')
+            })
+            .finally(() => setDisabled(false))
+        }}
+      >
+        <FileWordOutlined /> DOCX
       </Button>
       <p className="text-xs px-1 font-bold text-nowrap text-gray-600 dark:text-white">论文格式:</p>
       <Select

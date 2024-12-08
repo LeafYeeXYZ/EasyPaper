@@ -16,6 +16,12 @@ declare global {
         filepath: string,
         filename: string
       ) => Promise<boolean>
+      createDocx: (
+        markdown: string,
+        themeName: string,
+        filepath: string,
+        filename: string
+      ) => Promise<boolean>
     }
   }
 }

@@ -28,6 +28,14 @@ const api = {
     filename: string
   ): Promise<boolean> => {
     return electronAPI.ipcRenderer.invoke('createPdf', markdown, themeName, filepath, filename)
+  },
+  createDocx: (
+    markdown: string,
+    themeName: string,
+    filepath: string,
+    filename: string
+  ): Promise<boolean> => {
+    return electronAPI.ipcRenderer.invoke('createDocx', markdown, themeName, filepath, filename)
   }
 }
 
