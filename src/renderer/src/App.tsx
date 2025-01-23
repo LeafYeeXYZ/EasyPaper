@@ -41,7 +41,7 @@ function App(): JSX.Element {
   return (
     <main
       className={
-        'w-dvw h-dvh absolute grid grid-rows-[3rem,1fr] overflow-hidden bg-white dark:bg-gray-950' +
+        'w-dvw h-dvh absolute grid grid-rows-[3rem_1fr] overflow-hidden bg-white dark:bg-gray-950' +
         (theme === 'dark' ? ' dark' : '')
       }
     >

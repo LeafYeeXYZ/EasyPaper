@@ -175,28 +175,29 @@ export default function Toolbar(): JSX.Element {
         ))}
       </Select>
       <p className="text-xs px-1 font-bold text-nowrap text-gray-600 dark:text-white">设置:</p>
-      <Switch
-        checkedChildren="自动保存"
-        unCheckedChildren="自动保存"
-        checked={autoSave}
-        className="min-w-max"
-        onChange={(checked) => {
-          if (checked) {
-            setAutoSave(true)
-            if (savedMarkdown !== markdown) {
-              window.api
-                .savePaper(filepath, filename, markdown)
-                .then(() => {
-                  setSavedMarkdown(markdown)
-                  notificationApi?.success(getNotificationConfig())
-                })
-                .catch(() => messageApi!.error('保存失败'))
+      <div className="min-w-max">
+        <Switch
+          checkedChildren="自动保存"
+          unCheckedChildren="自动保存"
+          checked={autoSave}
+          onChange={(checked) => {
+            if (checked) {
+              setAutoSave(true)
+              if (savedMarkdown !== markdown) {
+                window.api
+                  .savePaper(filepath, filename, markdown)
+                  .then(() => {
+                    setSavedMarkdown(markdown)
+                    notificationApi?.success(getNotificationConfig())
+                  })
+                  .catch(() => messageApi!.error('保存失败'))
+              }
+            } else {
+              setAutoSave(false)
             }
-          } else {
-            setAutoSave(false)
-          }
-        }}
-      />
+          }}
+        />
+      </div>
       &nbsp;
     </div>
   )

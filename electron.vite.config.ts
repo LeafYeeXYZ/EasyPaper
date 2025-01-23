@@ -1,6 +1,8 @@
 import { resolve } from 'path'
 import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
 import react from '@vitejs/plugin-react'
+// @ts-expect-error works fine
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   main: {
@@ -15,6 +17,6 @@ export default defineConfig({
         '@lib': resolve('lib')
       }
     },
-    plugins: [react()]
+    plugins: [react(), tailwindcss()]
   }
 })
