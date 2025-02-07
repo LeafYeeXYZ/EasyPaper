@@ -53,7 +53,10 @@ export const APS: MarkdownPaperTheme = {
       line-height: 1.55em; /* 1.5倍行距 */
       margin: 0;
     }
-
+    hr { /* 用作分页符 */
+      page-break-after: always;
+      border: none;
+    }
     h1 { /* 中文题目: 二号黑体 */
       font-size: 29px;
       font-weight: normal;
